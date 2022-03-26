@@ -2,22 +2,22 @@
 - name: Check if required information are defined
   ansible.builtin.assert:
     that:
-      - var_apply_openscap_ipv4_sysctl_settings is boolean
-      - var_apply_openscap_ipv4_sysctl_settings is boolean
+      - var_apply_openscap_ipv4_sysctl_settings in [true, false]
+      - var_apply_openscap_ipv4_sysctl_settings in [true, false]
     quiet: true
     fail_msg: Exiting, not all required variables are provided
 
 - name: Include sysctl IPv4 tasks for {{ ansible_facts['os_family'] }} OS based systems
-  ansible.builtin.include-tasks:
-    - file: "{{ ansible_facts['os_family'] }}_ipv4.yml"
+  ansible.builtin.include_tasks:
+    file: "{{ ansible_facts['os_family'] }}_ipv4.yml"
   when:
     - ansible_facts['os_family'] in ["Debian"]
     - var_apply_openscap_ipv4_sysctl_settings
     - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
 
 - name: Include sysctl IPv6 tasks for {{ ansible_facts['os_family'] }} OS based systems
-  ansible.builtin.include-tasks:
-    - file: "{{ ansible_facts['os_family'] }}_ipv6.yml"
+  ansible.builtin.include_tasks:
+    file: "{{ ansible_facts['os_family'] }}_ipv6.yml"
   when:
     - ansible_facts['os_family'] in ["Debian"]
     - var_apply_openscap_ipv6_sysctl_settings
