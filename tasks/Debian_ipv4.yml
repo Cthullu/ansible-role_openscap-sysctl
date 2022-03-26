@@ -74,11 +74,11 @@
     - name: Enable Kernel Parameter to Use Reverse Path Filtering on all IPv4 Interfaces
       ansible.posix.sysctl:
         name: net.ipv4.conf.all.rp_filter
-        value: "{{ var_net_ipv4_conf_all.rp_filter }}"
+        value: "{{ var_net_ipv4_conf_all_rp_filter }}"
         state: "{{ var_ipv4_sysctl_state }}"
         sysctl_file: "{{ var_ipv4_sysctl_settings }}"
       become: true
-      when: var_net_ipv4_conf_all.rp_filter in [0, 1]
+      when: var_net_ipv4_conf_all_rp_filter in [0, 1]
 
     - name: Enable Kernel Parameter to Use Reverse Path Filtering on all IPv4 Interfaces by Default
       ansible.posix.sysctl:
