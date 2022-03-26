@@ -1,0 +1,191 @@
+---
+- name: Check if the config file exists
+  ansible.builtin.stat:
+    path: "{{ var_ipv4_sysctl_settings }}"
+  register: reg_ipv4_sysctl_file
+
+- name: Create the configuration file
+  ansible.builtin.file:
+    path: "{{ var_ipv4_sysctl_settings }}"
+    state: touch
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+  when: not reg_ipv4_sysctl_file['stat']['exists']
+
+- name: Disable Accepting ICMP Redirects for All IPv4 Interfaces
+  ansible.posix.sysctl:
+    name: net.ipv4.conf.all.accept_redirects
+    value: "{{ var_net_ipv4_conf_all_accept_redirects }}"
+    state: "{{ var_ipv4_sysctl_state }}"
+    sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+  become: true
+  when:
+    - var_net_ipv4_conf_all_accept_redirects in [0, 1]
+    - var_ipv4_sysctl_state in ["present", "absent"]
+
+- name: Disable Kernel Parameter for Accepting ICMP Redirects by Default on IPv4 Interface
+  ansible.posix.sysctl:
+    name: net.ipv4.conf.default.accept_redirects
+    value: "{{ var_net_ipv4_conf_default_accept_redirects }}"
+    state: "{{ var_ipv4_sysctl_state }}"
+    sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+  become: true
+  when:
+    - var_net_ipv4_conf_default_accept_redirects in [0, 1]
+    - var_ipv4_sysctl_state in ["present", "absent"]
+
+- name: Disable Kernel Parameter for Accepting Source-Routed Packets on all IPv4 Interfaces
+  ansible.posix.sysctl:
+    name: net.ipv4.conf.all.accept_source_route
+    value: "{{ var_net_ipv4_conf_all_accept_source_route }}"
+    state: "{{ var_ipv4_sysctl_state }}"
+    sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+  become: true
+  when:
+    - var_net_ipv4_conf_all_accept_source_route in [0, 1]
+    - var_ipv4_sysctl_state in ["present", "absent"]
+
+- name: Disable Kernel Parameter for Accepting Source-Routed Packets on IPv4 Interfaces by Default
+  ansible.posix.sysctl:
+    name: net.ipv4.conf.default.accept_source_route
+    value: "{{ var_net_ipv4_conf_default_accept_source_route }}"
+    state: "{{ var_ipv4_sysctl_state }}"
+    sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+  become: true
+  when:
+    - var_net_ipv4_conf_default_accept_source_route in [0, 1]
+    - var_ipv4_sysctl_state in ["present", "absent"]
+
+- name: Enable Kernel Parameter to Log Martian Packets on all IPv4 Interfaces
+  ansible.posix.sysctl:
+    name: net.ipv4.conf.all.log_martians
+    value: "{{ var_net_ipv4_conf_all_log_martians }}"
+    state: "{{ var_ipv4_sysctl_state }}"
+    sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+  become: true
+  when:
+    - var_net_ipv4_conf_all_log_martians in [0, 1]
+    - var_ipv4_sysctl_state in ["present", "absent"]
+
+- name: Enable Kernel Paremeter to Log Martian Packets on all IPv4 Interfaces by Default
+  ansible.posix.sysctl:
+    name: net.ipv4.conf.default.log_martians
+    value: "{{ var_net_ipv4_conf_default_log_martians }}"
+    state: "{{ var_ipv4_sysctl_state }}"
+    sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+  become: true
+  when:
+    - var_net_ipv4_conf_default_log_martians in [0, 1]
+    - var_ipv4_sysctl_state in ["present", "absent"]
+
+- name: Enable Kernel Parameter to Use Reverse Path Filtering on all IPv4 Interfaces
+  ansible.posix.sysctl:
+    name: net.ipv4.conf.all.rp_filter
+    value: "{{ var_net_ipv4_conf_all.rp_filter }}"
+    state: "{{ var_ipv4_sysctl_state }}"
+    sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+  become: true
+  when:
+    - var_net_ipv4_conf_all.rp_filter in [0, 1]
+    - var_ipv4_sysctl_state in ["present", "absent"]
+
+- name: Enable Kernel Parameter to Use Reverse Path Filtering on all IPv4 Interfaces by Default
+  ansible.posix.sysctl:
+    name: net.ipv4.conf.default.rp_filter
+    value: "{{ var_net_ipv4_conf_default_rp_filter }}"
+    state: "{{ var_ipv4_sysctl_state }}"
+    sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+  become: true
+  when:
+    - var_net_ipv4_conf_default_rp_filter in [0, 1]
+    - var_ipv4_sysctl_state in ["present", "absent"]
+
+- name: Disable Kernel Parameter for Accepting Secure ICMP Redirects on all IPv4 Interfaces
+  ansible.posix.sysctl:
+    name: net.ipv4.conf.all.secure_redirects
+    value: "{{ var_net_ipv4_conf_all_secure_redirects }}"
+    state: "{{ var_ipv4_sysctl_state }}"
+    sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+  become: true
+  when:
+    - var_net_ipv4_conf_all_secure_redirects in [0, 1]
+    - var_ipv4_sysctl_state in ["present", "absent"]
+
+- name: Configure Kernel Parameter for Accepting Secure Redirects By Default
+  ansible.posix.sysctl:
+    name: net.ipv4.conf.default.secure_redirects
+    value: "{{ var_net_ipv4_conf_default_secure_redirects }}"
+    state: "{{ var_ipv4_sysctl_state }}"
+    sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+  become: true
+  when:
+    - var_net_ipv4_conf_default_secure_redirects in [0, 1]
+    - var_ipv4_sysctl_state in ["present", "absent"]
+
+- name: Enable Kernel Parameter to Ignore ICMP Broadcast Echo Requests on IPv4 Interfaces
+  ansible.posix.sysctl:
+    name: net.ipv4.icmp_echo_ignore_broadcasts
+    value: "{{ var_net_ipv4_icmp_echo_ignore_broadcasts }}"
+    state: "{{ var_ipv4_sysctl_state }}"
+    sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+  become: true
+  when:
+    - var_net_ipv4_icmp_echo_ignore_broadcasts in [0, 1]
+    - var_ipv4_sysctl_state in ["present", "absent"]
+
+- name: Enable Kernel Parameter to Ignore Bogus ICMP Error Responses on IPv4 Interfaces
+  ansible.posix.sysctl:
+    name: net.ipv4.icmp_ignore_bogus_error_responses
+    value: "{{ var_net_ipv4_icmp_ignore_bogus_error_responses }}"
+    state: "{{ var_ipv4_sysctl_state }}"
+    sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+  become: true
+  when:
+    - var_net_ipv4_icmp_ignore_bogus_error_responses in [0, 1]
+    - var_ipv4_sysctl_state in ["present", "absent"]
+
+- name: Enable Kernel Parameter to Use TCP Syncookies on IPv4 Interfaces
+  ansible.posix.sysctl:
+    name: net.ipv4.tcp_syncookies
+    value: "{{ var_net_ipv4_tcp_syncookies }}"
+    state: "{{ var_ipv4_sysctl_state }}"
+    sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+  become: true
+  when:
+    - var_net_ipv4_tcp_syncookies in [0, 1]
+    - var_ipv4_sysctl_state in ["present", "absent"]
+
+- name: Disable Kernel Parameter for Sending ICMP Redirects on all IPv4 Interfaces
+  ansible.posix.sysctl:
+    name: net.ipv4.conf.all.send_redirects
+    value: "{{ var_net_ipv4_conf_all_send_redirects }}"
+    state: "{{ var_ipv4_sysctl_state }}"
+    sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+  become: true
+  when:
+    - var_net_ipv4_conf_all_send_redirects in [0, 1]
+    - var_ipv4_sysctl_state in ["present", "absent"]
+
+- name: Disable Kernel Parameter for Sending ICMP Redirects on all IPv4 Interfaces by Default
+  ansible.posix.sysctl:
+    name: net.ipv4.conf.default.send_redirects
+    value: "{{ var_net_ipv4_conf_default_send_redirects }}"
+    state: "{{ var_ipv4_sysctl_state }}"
+    sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+  become: true
+  when:
+    - var_net_ipv4_conf_default_send_redirects in [0, 1]
+    - var_ipv4_sysctl_state in ["present", "absent"]
+
+- name: Disable Kernel Parameter for IP Forwarding on IPv4 Interfaces
+  ansible.posix.sysctl:
+    name: net.ipv4.ip_forward
+    value: "{{ var_net_ipv4_ip_forward }}"
+    state: "{{ var_ipv4_sysctl_state }}"
+    sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+  become: true
+  when:
+    - var_net_ipv4_ip_forward in [0, 1]
+    - var_ipv4_sysctl_state in ["present", "absent"]
