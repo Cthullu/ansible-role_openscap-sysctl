@@ -1,12 +1,12 @@
 ---
 - name: Check if the config file exists
   ansible.builtin.stat:
-    path: "{{ var_ipv4_sysctl_settings }}"
+    path: "{{ var_ipv4_sysctl_settings_file }}"
   register: reg_ipv4_sysctl_file
 
 - name: Create the configuration file
   ansible.builtin.file:
-    path: "{{ var_ipv4_sysctl_settings }}"
+    path: "{{ var_ipv4_sysctl_settings_file }}"
     state: touch
     owner: root
     group: root
@@ -22,7 +22,7 @@
         name: net.ipv4.conf.all.accept_redirects
         value: "{{ var_net_ipv4_conf_all_accept_redirects }}"
         state: "{{ var_ipv4_sysctl_state }}"
-        sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv4_sysctl_settings_file }}"
       become: true
       when: var_net_ipv4_conf_all_accept_redirects in [0, 1]
 
@@ -31,7 +31,7 @@
         name: net.ipv4.conf.default.accept_redirects
         value: "{{ var_net_ipv4_conf_default_accept_redirects }}"
         state: "{{ var_ipv4_sysctl_state }}"
-        sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv4_sysctl_settings_file }}"
       become: true
       when: var_net_ipv4_conf_default_accept_redirects in [0, 1]
 
@@ -40,7 +40,7 @@
         name: net.ipv4.conf.all.accept_source_route
         value: "{{ var_net_ipv4_conf_all_accept_source_route }}"
         state: "{{ var_ipv4_sysctl_state }}"
-        sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv4_sysctl_settings_file }}"
       become: true
       when: var_net_ipv4_conf_all_accept_source_route in [0, 1]
 
@@ -49,7 +49,7 @@
         name: net.ipv4.conf.default.accept_source_route
         value: "{{ var_net_ipv4_conf_default_accept_source_route }}"
         state: "{{ var_ipv4_sysctl_state }}"
-        sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv4_sysctl_settings_file }}"
       become: true
       when: var_net_ipv4_conf_default_accept_source_route in [0, 1]
 
@@ -58,7 +58,7 @@
         name: net.ipv4.conf.all.log_martians
         value: "{{ var_net_ipv4_conf_all_log_martians }}"
         state: "{{ var_ipv4_sysctl_state }}"
-        sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv4_sysctl_settings_file }}"
       become: true
       when: var_net_ipv4_conf_all_log_martians in [0, 1]
 
@@ -67,7 +67,7 @@
         name: net.ipv4.conf.default.log_martians
         value: "{{ var_net_ipv4_conf_default_log_martians }}"
         state: "{{ var_ipv4_sysctl_state }}"
-        sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv4_sysctl_settings_file }}"
       become: true
       when: var_net_ipv4_conf_default_log_martians in [0, 1]
 
@@ -76,7 +76,7 @@
         name: net.ipv4.conf.all.rp_filter
         value: "{{ var_net_ipv4_conf_all_rp_filter }}"
         state: "{{ var_ipv4_sysctl_state }}"
-        sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv4_sysctl_settings_file }}"
       become: true
       when: var_net_ipv4_conf_all_rp_filter in [0, 1]
 
@@ -85,7 +85,7 @@
         name: net.ipv4.conf.default.rp_filter
         value: "{{ var_net_ipv4_conf_default_rp_filter }}"
         state: "{{ var_ipv4_sysctl_state }}"
-        sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv4_sysctl_settings_file }}"
       become: true
       when: var_net_ipv4_conf_default_rp_filter in [0, 1]
 
@@ -94,7 +94,7 @@
         name: net.ipv4.conf.all.secure_redirects
         value: "{{ var_net_ipv4_conf_all_secure_redirects }}"
         state: "{{ var_ipv4_sysctl_state }}"
-        sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv4_sysctl_settings_file }}"
       become: true
       when: var_net_ipv4_conf_all_secure_redirects in [0, 1]
 
@@ -103,7 +103,7 @@
         name: net.ipv4.conf.default.secure_redirects
         value: "{{ var_net_ipv4_conf_default_secure_redirects }}"
         state: "{{ var_ipv4_sysctl_state }}"
-        sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv4_sysctl_settings_file }}"
       become: true
       when: var_net_ipv4_conf_default_secure_redirects in [0, 1]
 
@@ -112,7 +112,7 @@
         name: net.ipv4.icmp_echo_ignore_broadcasts
         value: "{{ var_net_ipv4_icmp_echo_ignore_broadcasts }}"
         state: "{{ var_ipv4_sysctl_state }}"
-        sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv4_sysctl_settings_file }}"
       become: true
       when: var_net_ipv4_icmp_echo_ignore_broadcasts in [0, 1]
 
@@ -121,7 +121,7 @@
         name: net.ipv4.icmp_ignore_bogus_error_responses
         value: "{{ var_net_ipv4_icmp_ignore_bogus_error_responses }}"
         state: "{{ var_ipv4_sysctl_state }}"
-        sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv4_sysctl_settings_file }}"
       become: true
       when: var_net_ipv4_icmp_ignore_bogus_error_responses in [0, 1]
 
@@ -130,7 +130,7 @@
         name: net.ipv4.tcp_syncookies
         value: "{{ var_net_ipv4_tcp_syncookies }}"
         state: "{{ var_ipv4_sysctl_state }}"
-        sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv4_sysctl_settings_file }}"
       become: true
       when:
         - var_net_ipv4_tcp_syncookies in [0, 1]
@@ -141,7 +141,7 @@
         name: net.ipv4.conf.all.send_redirects
         value: "{{ var_net_ipv4_conf_all_send_redirects }}"
         state: "{{ var_ipv4_sysctl_state }}"
-        sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv4_sysctl_settings_file }}"
       become: true
       when:
         - var_net_ipv4_conf_all_send_redirects in [0, 1]
@@ -152,7 +152,7 @@
         name: net.ipv4.conf.default.send_redirects
         value: "{{ var_net_ipv4_conf_default_send_redirects }}"
         state: "{{ var_ipv4_sysctl_state }}"
-        sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv4_sysctl_settings_file }}"
       become: true
       when:
         - var_net_ipv4_conf_default_send_redirects in [0, 1]
@@ -163,7 +163,7 @@
         name: net.ipv4.ip_forward
         value: "{{ var_net_ipv4_ip_forward }}"
         state: "{{ var_ipv4_sysctl_state }}"
-        sysctl_file: "{{ var_ipv4_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv4_sysctl_settings_file }}"
       become: true
       when:
         - var_net_ipv4_ip_forward in [0, 1]

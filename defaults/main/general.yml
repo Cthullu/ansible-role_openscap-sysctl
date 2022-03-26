@@ -14,5 +14,5 @@ var_ipv6_sysctl_state: present
 #
 # (string) The paths to write the systctl settings to
 #
-var_ipv4_sysctl_settings: /etc/sysctl.d/99-openscap_ipv4.conf
-var_ipv6_sysctl_settings: /etc/sysctl.d/99-openscap_ipv6.conf
+var_ipv4_sysctl_settings_file: /etc/sysctl.d/99-openscap_ipv4.conf
+var_ipv6_sysctl_settings_file: /etc/sysctl.d/99-openscap_ipv6.conf

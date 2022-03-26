@@ -1,12 +1,12 @@
 ---
 - name: Check if the config file exists
   ansible.builtin.stat:
-    path: "{{ var_ipv6_sysctl_settings }}"
+    path: "{{ var_ipv6_sysctl_settings_file }}"
   register: reg_ipv6_sysctl_file
 
 - name: Create the configuration file
   ansible.builtin.file:
-    path: "{{ var_ipv6_sysctl_settings }}"
+    path: "{{ var_ipv6_sysctl_settings_file }}"
     state: touch
     owner: root
     group: root
@@ -22,7 +22,7 @@
         name: net.ipv6.conf.all.accept_ra
         value: "{{ var_net_ipv6_conf_all_accept_ra }}"
         state: "{{ var_ipv6_sysctl_state }}"
-        sysctl_file: "{{ var_ipv6_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv6_sysctl_settings_file }}"
       become: true
       when: var_net_ipv6_conf_all_accept_ra in [0, 1]
 
@@ -31,7 +31,7 @@
         name: net.ipv6.conf.all.accept_redirects
         value: "{{ var_net_ipv6_conf_all_accept_redirects }}"
         state: "{{ var_ipv6_sysctl_state }}"
-        sysctl_file: "{{ var_ipv6_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv6_sysctl_settings_file }}"
       become: true
       when: var_net_ipv6_conf_all_accept_redirects in [0, 1]
 
@@ -40,7 +40,7 @@
         name: net.ipv6.conf.all.accept_source_route
         value: "{{ var_net_ipv6_conf_all_accept_source_route }}"
         state: "{{ var_ipv6_sysctl_state }}"
-        sysctl_file: "{{ var_ipv6_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv6_sysctl_settings_file }}"
       become: true
       when: var_net_ipv6_conf_all_accept_source_route in [0, 1]
 
@@ -49,7 +49,7 @@
         name: net.ipv6.conf.all.forwarding
         value: "{{ var_net_ipv6_conf_all_forwarding }}"
         state: "{{ var_ipv6_sysctl_state }}"
-        sysctl_file: "{{ var_ipv6_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv6_sysctl_settings_file }}"
       become: true
       when: var_net_ipv6_conf_all_forwarding in [0, 1]
 
@@ -58,7 +58,7 @@
         name: net.ipv6.conf.default.accept_ra
         value: "{{ var_net_ipv6_conf_default_accept_ra }}"
         state: "{{ var_ipv6_sysctl_state }}"
-        sysctl_file: "{{ var_ipv6_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv6_sysctl_settings_file }}"
       become: true
       when: var_net_ipv6_conf_default_accept_ra in [0, 1]
 
@@ -67,7 +67,7 @@
         name: net.ipv6.conf.default.accept_redirects
         value: "{{ var_net_ipv6_conf_default_accept_redirects }}"
         state: "{{ var_ipv6_sysctl_state }}"
-        sysctl_file: "{{ var_ipv6_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv6_sysctl_settings_file }}"
       become: true
       when: var_net_ipv6_conf_default_accept_redirects in [0, 1]
 
@@ -76,7 +76,7 @@
         name: net.ipv6.conf.default.accept_source_route
         value: "{{ var_net_ipv6_conf_default_accept_source_route }}"
         state: "{{ var_ipv6_sysctl_state }}"
-        sysctl_file: "{{ var_ipv6_sysctl_settings }}"
+        sysctl_file: "{{ var_ipv6_sysctl_settings_file }}"
       become: true
       when: var_net_ipv6_conf_default_accept_source_route in [0, 1]
 
