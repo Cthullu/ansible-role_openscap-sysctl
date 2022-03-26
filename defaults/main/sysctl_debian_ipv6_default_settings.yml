@@ -1,0 +1,67 @@
+---
+############################################################################################
+# A major feature of IPv6 is the extent to which systems implementing it can automatically
+# configure their networking devices using information from the network. From a security
+# perspective, manually configuring important configuration information is preferable to
+# accepting it from the network in an unauthenticated fashion.
+############################################################################################
+
+#
+# [Configure Accepting Router Advertisements on All IPv6 Interfaces]
+#
+# An illicit router advertisement message could result in a man-in-the-middle attack.
+#
+var_net_ipv6_conf_all_accept_ra: 0
+
+#
+# [Disable Accepting ICMP Redirects for All IPv6 Interfaces]
+#
+# An illicit ICMP redirect message could result in a man-in-the-middle attack.
+#
+var_net_ipv6_conf_all_accept_redirects: 0
+
+#
+# [Disable Kernel Parameter for Accepting Source-Routed Packets on all IPv6 Interfaces]
+#
+# Source-routed packets allow the source of the packet to suggest routers forward the packet along a different path than
+# configured on the router, which can be used to bypass network security measures. This requirement applies only to the
+# forwarding of source-routerd traffic, such as when IPv6 forwarding is enabled and the system is functioning as a
+# router.
+#
+# Accepting source-routed packets in the IPv6 protocol has few legitimate uses. It should be disabled unless it is
+# absolutely required.
+#
+var_net_ipv6_conf_all_accept_source_route: 0
+
+#
+# [Disable Kernel Parameter for IPv6 Forwarding]
+#
+# IP forwarding permits the kernel to forward packets from one network interface to another. The ability to forward
+# packets between two networks is only appropriate for systems acting as routers.
+#
+var_net_ipv6_conf_all_forwarding: 0
+
+#
+# [Disable Accepting Router Advertisements on all IPv6 Interfaces by Default]
+#
+# An illicit router advertisement message could result in a man-in-the-middle attack.
+#
+var_net_ipv6_conf_default_accept_ra: 0
+
+#
+# [Disable Kernel Parameter for Accepting ICMP Redirects by Default on IPv6 Interfaces]
+#
+# An illicit ICMP redirect message could result in a man-in-the-middle attack.
+#
+var_net_ipv6_conf_default_accept_redirects: 0
+
+#
+# [Disable Kernel Parameter for Accepting Source-Routed Packets on IPv6 Interfaces by Default]
+#
+# Source-routed packets allow the source of the packet to suggest routers forward the packet along a different path than
+# configured on the router, which can be used to bypass network security measures. This requirement applies only to the
+# forwarding of source-routerd traffic, such as when IPv6 forwarding is enabled and the system is functioning as a
+# router. Accepting source-routed packets in the IPv6 protocol has few legitimate uses. It should be disabled unless it
+# is absolutely required.
+#
+var_net_ipv6_conf_default_accept_source_route: 0
