@@ -132,7 +132,9 @@
         state: "{{ var_ipv4_sysctl_state }}"
         sysctl_file: "{{ var_ipv4_sysctl_settings }}"
       become: true
-      when: var_net_ipv4_tcp_syncookies in [0, 1]
+      when:
+        - var_net_ipv4_tcp_syncookies in [0, 1]
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
 
     - name: Disable Kernel Parameter for Sending ICMP Redirects on all IPv4 Interfaces
       ansible.posix.sysctl:
@@ -141,7 +143,9 @@
         state: "{{ var_ipv4_sysctl_state }}"
         sysctl_file: "{{ var_ipv4_sysctl_settings }}"
       become: true
-      when: var_net_ipv4_conf_all_send_redirects in [0, 1]
+      when:
+        - var_net_ipv4_conf_all_send_redirects in [0, 1]
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
 
     - name: Disable Kernel Parameter for Sending ICMP Redirects on all IPv4 Interfaces by Default
       ansible.posix.sysctl:
@@ -150,7 +154,9 @@
         state: "{{ var_ipv4_sysctl_state }}"
         sysctl_file: "{{ var_ipv4_sysctl_settings }}"
       become: true
-      when: var_net_ipv4_conf_default_send_redirects in [0, 1]
+      when:
+        - var_net_ipv4_conf_default_send_redirects in [0, 1]
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
 
     - name: Disable Kernel Parameter for IP Forwarding on IPv4 Interfaces
       ansible.posix.sysctl:
@@ -159,6 +165,8 @@
         state: "{{ var_ipv4_sysctl_state }}"
         sysctl_file: "{{ var_ipv4_sysctl_settings }}"
       become: true
-      when: var_net_ipv4_ip_forward in [0, 1]
+      when:
+        - var_net_ipv4_ip_forward in [0, 1]
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
 
   when: var_ipv4_sysctl_state in ["present", "absent"]
