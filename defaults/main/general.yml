@@ -1,4 +1,18 @@
 ---
-# defaults file for openscap-sysctl
+#
+# (booelan) Toggle which settings should be applied
+#
 var_apply_openscap_ipv4_sysctl_settings: true
 var_apply_openscap_ipv6_sysctl_settings: true
+
+#
+# (string) The state the sysctl parameters should have. Has t be one of [present, absent]
+#
+var_ipv4_sysctl_state: present
+var_ipv6_sysctl_state: present
+
+#
+# (string) The paths to write the systctl settings to
+#
+var_ipv4_sysctl_settings: /etc/sysctl.d/99-openscap_ipv4.conf
+var_ipv6_sysctl_settings: /etc/sysctl.d/99-openscap_ipv6.conf
