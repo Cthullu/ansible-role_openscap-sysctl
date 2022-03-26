@@ -1,0 +1,4 @@
+---
+# defaults file for openscap-sysctl
+var_apply_openscap_ipv4_sysctl_settings: true
+var_apply_openscap_ipv6_sysctl_settings: true
