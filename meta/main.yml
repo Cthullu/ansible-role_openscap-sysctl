@@ -1,3 +1,4 @@
+---
 galaxy_info:
   author: Daniel Kuß
   description: Ansible role to apply sysctl settings as successted by openSCAP
@@ -17,9 +18,9 @@ galaxy_info:
   # https://galaxy.ansible.com/api/v1/platforms/
   #
   platforms:
-  - name: Ubuntu
-    versions:
-    - 20.04
+    - name: Ubuntu
+      versions:
+        - 20.04
 
   galaxy_tags: []
     # List tags for your role here, one per line. A tag is a keyword that describes
